@@ -1,0 +1,26 @@
+<div class="playlist-create-wrapper">
+    <div class="playlist-create-container">
+        <h1>Create Playlist</h1>
+        <form [formGroup]="createPlaylistForm" class="create-form" (ngSubmit)="submit()">
+            <div class="create-playlist">
+                <div class="add-poster">
+                    <img *ngIf="posterUrl" [src]="posterUrl">
+                    <input type="file" #file (change)="uploadImage($event)" style="display:none;">
+                    <button type="button" class="btn form-btn upload-picture" *ngIf="!posterUrl" (click)="file.click()">Upload</button>
+                    <button type="button" class="btn form-btn change-picture" *ngIf="posterUrl" (click)="file.click()">Change</button>
+                </div>
+                <div class="playlist-item-list">
+                    <div class="playlist-item">
+                        <label for="title">Titile:</label>
+                        <input class="form-control" formControlName="title" id="title" type="text">
+                    </div>
+                    <div class="playlist-item">
+                        <label for="description">Description:</label>
+                        <textarea class="form-control" id="description" rows="5" formControlName="description"></textarea>
+                    </div>
+                </div>
+            </div>
+            <button class="form-btn submit" [disabled]="!createPlaylistForm.valid" type="submit">Create Playlist</button>
+        </form>
+    </div>
+</div>

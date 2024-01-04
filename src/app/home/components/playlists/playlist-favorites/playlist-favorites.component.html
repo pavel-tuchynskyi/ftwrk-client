@@ -1,0 +1,56 @@
+<div class="playlist-details-wrapper">
+    <div class="playlist-details-container" *ngIf="playlist">
+        <div class="playlist-details-header">
+            <div class="playlist-detail-header-container">
+                <div class="header-logo">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="white" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                    </svg>
+                </div>
+                <div>
+                    <h1>Liked songs</h1>
+                </div>
+            </div>
+        </div>
+        <div class="song-container">
+            <div class="song-header">
+                <span>
+                    <svg (click)="playSong(songList.items[0])" xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-play-fill" viewBox="0 0 16 16">
+                        <path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
+                    </svg>
+                </span>
+            </div>
+            
+            <app-song-list 
+            [allowDrag]="false"
+            [songs]="songList" 
+            [columns]="columns"
+            [currentSong]="currentSong"
+            [isFavoritePlaylist]="true"
+            (pageNumber)="loadSongsOnScroll($event)"
+            (sort)="sort($event)"
+            (contextMenuData)="openMenu($event)"
+            (songToPlay)="playSong($event)"
+            ></app-song-list>
+        </div>
+    </div>
+</div>
+
+<div style="visibility: hidden; position: fixed;" 
+[style.left]="menuPosition.x" 
+[style.top]="menuPosition.y" 
+[matMenuTriggerFor]="rightMenu">
+</div>
+<mat-menu #rightMenu="matMenu"> 
+    <ng-template matMenuContent let-playlists="playlists" let-song="song"> 
+        <button mat-menu-item [matMenuTriggerFor]="playlistMenu">
+            Add to playlist
+        </button>
+        <mat-menu #playlistMenu="matMenu">
+            <button mat-menu-item (click)="addToPlaylist(song, playlist.id)" *ngFor="let playlist of playlists">
+                {{playlist.title}}
+            </button>
+        </mat-menu>
+        <button mat-menu-item (click)="closeMenu()">Close</button> 
+    </ng-template> 
+</mat-menu>

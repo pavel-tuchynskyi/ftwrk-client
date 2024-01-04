@@ -1,0 +1,76 @@
+<div class="search-wrapper">
+    <div class="search-container">
+        <h1>Search</h1>
+        <form [formGroup]="searchForm">
+            <input type="text" class="search-bar" formControlName="searchTerm">
+            <div>
+                <input type="radio" formControlName="searchType" value="Album">
+                <label>
+                    <input type="radio" formControlName="searchType" checked value="Album">
+                    <h2>Albums</h2>
+                </label>
+                <label>
+                    <input type="radio" formControlName="searchType" value="Song">
+                    <h2>Songs</h2>
+                </label>
+                <label>
+                    <input type="radio" formControlName="searchType" value="Playlist">
+                    <h2>Playlists</h2>
+                </label>
+                <label>
+                    <input type="radio" formControlName="searchType" value="Artist">
+                    <h2>Artists</h2>
+                </label>
+            </div>
+        </form>
+        <div class="items">
+            <app-item-group *ngIf="searchType.value == 'Album'" 
+            [items]="albums"
+            (itemClicked)="goToAlbum($event)"
+            (pageNumber)="changePage($event)">
+            </app-item-group>
+
+            <app-song-list 
+            *ngIf="searchType.value == 'Song'"
+            [allowDrag]="false"
+            [songs]="songList" 
+            [columns]="columns"
+            [currentSong]="currentSong"
+            (pageNumber)="changePage($event)"
+            (sort)="sort($event)"
+            (contextMenuData)="openMenu($event)"
+            (songToPlay)="playSong($event)">
+            </app-song-list>
+
+            <app-item-group *ngIf="searchType.value == 'Playlist'"
+            [items]="playlists"
+            (itemClicked)="goToPlaylist($event)"
+            (pageNumber)="changePage($event)">
+            </app-item-group>
+
+            <app-item-group *ngIf="searchType.value == 'Artist'"
+            [items]="artists"
+            (itemClicked)="goToArtist($event)"
+            (pageNumber)="changePage($event)"></app-item-group>
+        </div>
+    </div>
+</div>
+
+<div style="visibility: hidden; position: fixed;" 
+[style.left]="menuPosition.x" 
+[style.top]="menuPosition.y" 
+[matMenuTriggerFor]="rightMenu">
+</div>
+<mat-menu #rightMenu="matMenu"> 
+    <ng-template matMenuContent let-playlists="playlists" let-song="song"> 
+        <button *ngIf="!song.isArchived" mat-menu-item [matMenuTriggerFor]="playlistMenu">
+            Add to playlist
+        </button>
+        <mat-menu #playlistMenu="matMenu">
+            <button mat-menu-item (click)="addToPlaylist(song, playlist.id)" *ngFor="let playlist of playlists">
+                {{playlist.title}}
+            </button>
+        </mat-menu>
+        <button mat-menu-item (click)="closeMenu()">Close</button> 
+    </ng-template> 
+</mat-menu>

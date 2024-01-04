@@ -1,0 +1,52 @@
+<div class="profile-wrapper" [ngStyle]="background ? {'background-image': background} : {}">
+    <div class="profile-container">
+        <div class="profile-header">
+            <div id="pic" #header></div>
+            <img [src]="picture ?? 'assets/img/profile-picture-default.jpg'" />
+            <h1>{{fullName}}</h1>
+        </div>
+
+        <div class="content-container">
+            <div class="content" *ngIf="userAlbums">
+                <div class="content-header">
+                    <h2>Discography</h2>
+                    <button (click)="showAlbums()">
+                        <h5>
+                            Show All
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                            </svg>
+                        </h5>
+                    </button>
+                </div>
+                <div class="content-item-group">
+                    <div *ngFor="let album of userAlbums" (click)="albumDetails(album.id)">
+                        <img [src]="album.poster">
+                        <h5>{{album.title}}</h5>
+                        <p>{{album.year}} - {{getAlbumTypeName(album.albumType)}}</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content" *ngIf="userPlaylists">
+                <div class="content-header">
+                    <h2>Playlists</h2>
+                    <button (click)="showPlaylists()">
+                        <h5>
+                            Show All
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                            </svg>
+                        </h5>
+                    </button>
+                </div>
+                <div class="content-item-group">
+                    <div *ngFor="let playlist of userPlaylists" (click)="playlistDetails(playlist.id)">
+                        <img [src]="playlist.poster ? playlist.poster : '../assets/img/playlist.png'">
+                        <h5>{{playlist.title}}</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

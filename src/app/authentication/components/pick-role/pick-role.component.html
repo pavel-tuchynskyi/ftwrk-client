@@ -1,0 +1,19 @@
+<div class="role-wrapper">
+    <div class="role-container">
+        <h1 class="h1">{{'Who are you' | uppercase}}</h1>
+        <form [formGroup]="roleForm" (ngSubmit)="submit()">
+            <div>
+                <input type="radio" formControlName="role" value="User">
+                <label>
+                    <input type="radio" formControlName="role" value="User">
+                    <img src="../../../../assets/img/user.png" alt="User">
+                </label>
+                <label>
+                    <input type="radio" formControlName="role" value="Artist">
+                    <img src="../../../../assets/img/artist.png" alt="Artist">
+                </label>
+            </div>
+            <button class="btn" type="submit">Submit</button>
+        </form>
+    </div>
+</div>

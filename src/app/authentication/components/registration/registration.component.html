@@ -1,0 +1,20 @@
+<div class="signup-wrapper">
+    <div class="signup-container">
+        <h1 class="h1">{{'Sign up' | uppercase}}</h1>     
+        <form [formGroup]="registrationForm" (ngSubmit)="submit()">
+            <div>
+                <input class="form-control" type="text" placeholder="User name" formControlName="userName" />
+                <input class="form-control" type="text" placeholder="Full name" formControlName="fullName" />
+                <input class="form-control" type="text" placeholder="Email" formControlName="email" />
+                <input class="form-control" type="text" placeholder="Country" formControlName="country" />
+                <input class="form-control" type="number" placeholder="Age" formControlName="age" />
+                <input class="form-control" type="password" placeholder="Password" formControlName="password" />
+                
+                <button class="btn signup" type="submit" [disabled]="registrationForm.invalid">Sign Up</button>
+            </div>
+        </form>
+        <h4>{{'Or' | uppercase}}</h4>
+        <app-external></app-external>
+        <h4 class="sign-in">{{"Have an account?" | uppercase}} <a class="sign-in-link" [routerLink]="['/login']">LOG IN</a></h4>
+    </div>
+</div>

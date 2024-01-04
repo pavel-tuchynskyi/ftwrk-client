@@ -1,0 +1,55 @@
+.menu-wrapper{
+    width: 15%;
+    height: 100%;
+    position: fixed;
+    background-color: rgb(20, 20, 20);
+    padding-top: 60px;
+    z-index: 999;
+
+    h4{
+        margin-bottom: 20px;
+        color: rgb(170, 170, 170);
+        transition: .2s ease-in-out;
+        cursor: pointer;
+        
+        svg{
+            margin-bottom: 5px;
+            margin-right: 10px;
+        }
+    }
+
+    h4:hover{
+        color: #fff;
+    }
+}
+
+.playlists{
+    height: 50vh;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    margin-top: 10px;
+}
+
+.playlists::-webkit-scrollbar {
+    width: 10px;
+}
+  
+.playlists::-webkit-scrollbar-track {
+    background: transparent; 
+}
+   
+.playlists::-webkit-scrollbar-thumb {
+    background: #888; 
+}
+  
+.playlists::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+
+::ng-deep {
+    .playlists{
+        .mat-list-item{
+            height: 30px !important;
+        }
+    }
+}

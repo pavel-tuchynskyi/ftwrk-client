@@ -1,0 +1,46 @@
+.message-wrapper{
+    position: fixed;
+    right: 0;
+    top: 30%;
+    width: 300px;
+    z-index: 9999;
+}
+
+.message{
+    display: table;
+    color: #fff;
+    transition: all 0.2s ease;
+    border-radius: 10px;
+    animation-name: appearence;
+    animation-duration: .5s;
+    margin-bottom: 5px;
+}
+  
+.message-border {
+    display: table-cell;
+    vertical-align: middle;
+    width: 10px;
+    background-color: rgb(175, 32, 13);
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+    
+.message-body {
+    display: table-cell;
+    vertical-align: bottom;
+    padding: 0px 20px 0px 10px;
+    background-color: rgb(27, 27, 27);
+      
+    p {
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-weight: bold;
+      margin-left: 5px;
+      margin-top: 10px;
+    }
+}
+  
+@keyframes appearence {
+    0% {right: -300px; }
+    100% { right: 0; }
+}

@@ -1,0 +1,27 @@
+.delete-form{
+    h1{
+        font-size: 25px;
+    }
+
+    div{
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+
+        button{
+            width: 100px;
+            margin-left: 35px;
+            color: #000;
+            font-size: 20px;
+            border-radius: 20px;
+            background-color: #fff;
+            transition: .2s ease-in-out;
+            border: none;
+        }
+
+        button:hover{
+            background-color: rgb(4, 187, 4);
+            color: #fff;
+        }
+    }
+}

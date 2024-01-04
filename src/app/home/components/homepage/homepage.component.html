@@ -1,0 +1,18 @@
+<div class="home-wrapper">
+    <div class="home-container">
+        <mat-card class="home-header" id="pic" #header>
+            <h1>Welcome</h1>
+            <mat-card-header *ngIf="profile">
+                <img mat-card-avatar [src]="picture ?? 'assets/img/profile-picture-default.jpg'"/>
+                <mat-card-title>
+                    <h2>{{profile.fullName}}</h2>
+                </mat-card-title>
+                <mat-card-subtitle>
+                    <button (click)="openProfile()"><h3>Go to profile</h3></button>
+                </mat-card-subtitle>
+            </mat-card-header>
+        </mat-card>
+        <h1>Recommendations</h1>
+        <app-item-group [items]="albums"></app-item-group>
+    </div>
+</div>

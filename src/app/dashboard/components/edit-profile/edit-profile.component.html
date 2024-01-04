@@ -1,0 +1,46 @@
+<div class="profile-wrapper">
+    <div class="profile-container">
+        <h1 class="h1">{{'Edit Profile' | uppercase}}</h1>
+        <div class="profile">
+            <form *ngIf="profile" class="profile-data" [formGroup]="editForm" (ngSubmit)="submit()">
+                <div class="edit-form-group">
+                    <div class="edit-pic">
+                        <img [src]="newPicture? newPicture : picture" class="profile-pic">
+                        <input type="file" #file (change)="uploadProfilePicture($event)" style="display:none;">
+                        <button type="button" class="btn edit-profile-btn" (click)="file.click()">Change Picture</button>
+                    </div>
+                    <div class="edit-form-contro-group">
+                        <div class="edit-form-control">
+                            <label for="userName">User name</label>
+                            <input type="text" class="edit-form-input" id="userName" formControlName="userName" placeholder="User name">
+                        </div>
+                        <div class="edit-form-control">
+                            <label for="fullName">Full Name</label>
+                            <input type="text" class="edit-form-input" id="fullName" formControlName="fullName" placeholder="Full Name">
+                        </div>
+                        <div class="edit-form-control">
+                            <label for="email">Email</label>
+                            <input type="text" class="edit-form-input" id="email" formControlName="email" placeholder="Email">
+                        </div>
+                        <div class="edit-form-control">
+                            <label for="country">Country</label>
+                            <input type="text" class="edit-form-input" id="country" formControlName="country" placeholder="Country">
+                        </div>
+                        <div class="edit-form-control">
+                            <label for="age">Age</label>
+                            <input type="number" class="edit-form-input" id="age" formControlName="age" placeholder="Age">
+                        </div>             
+                    </div>
+                </div>
+                <div class="profile-background">
+                    <div>
+                        <img [src]="newBackground? newBackground : background">
+                    </div>
+                    <input type="file" #file2 (change)="uploadBackground($event)" style="display:none;">
+                    <button type="button" class="btn edit-profile-btn" (click)="file2.click()">Change Background</button>
+                </div>
+                <button class="btn edit-profile-btn submit" [disabled]="editForm.invalid" type="submit">Save</button>
+            </form>
+        </div>
+    </div>
+</div>

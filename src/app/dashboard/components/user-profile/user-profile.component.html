@@ -1,0 +1,37 @@
+<div class="profile-wrapper">
+    <div class="profile-container">
+        <h1 class="h1">{{'Profile Overview' | uppercase}}</h1>
+        <div class="profile">
+            <img [src]="picture ?? 'assets/img/profile-picture-default.jpg'" class="profile-pic" >
+            <div *ngIf="profile" class="profile-data">
+                <table>
+                    <tr class="profile-data-row">
+                        <td class="profile-prop">Name</td>
+                        <td class="profile-val">{{profile.userName}}</td>
+                    </tr>
+                    <tr class="profile-data-row">
+                        <td class="profile-prop">FullName</td>
+                        <td class="profile-val">{{profile.fullName}}</td>
+                    </tr>
+                    <tr class="profile-data-row">
+                        <td class="profile-prop">Country</td>
+                        <td class="profile-val">{{profile.country}}</td>
+                    </tr>
+                    <tr class="profile-data-row">
+                        <td class="profile-prop">Age</td>
+                        <td class="profile-val">{{profile.age}}</td>
+                    </tr>
+                    <tr class="profile-data-row">
+                        <td class="profile-prop">Email</td>
+                        <td class="profile-val">
+                            {{profile.email}}
+                        </td>
+                    </tr>
+                </table>
+                <p *ngIf="showMessage">Check your inbox to reset password</p>       
+            </div>
+        </div>
+        <button class="btn edit-profile-btn confirm" (click)="confirmEmail()" *ngIf="profile && !profile.emailConfirmed">Confirm Email</button>
+        <button class="btn edit-profile-btn" [routerLink]="['/edit-profile']">Edit profile</button>
+    </div>
+</div>

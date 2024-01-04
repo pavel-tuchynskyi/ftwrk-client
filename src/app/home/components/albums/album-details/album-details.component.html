@@ -1,0 +1,81 @@
+<div class="album-details-wrapper" [ngStyle]="background ? {'background-image': background} : {}">
+    <div class="album-details-container" *ngIf="albumDetails">
+        <div class="album-details-header">
+            <button (click)="goBack()">
+                <h5>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-return-left" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5z"/>
+                    </svg>
+                    Albums
+                </h5>
+            </button>
+            <div class="album-detail-header-container">
+                <img id="poster" [src]="albumDetails.poster">
+                <div>
+                    <h5>{{getAlbumTypeName(albumDetails.albumType)}}</h5>
+                    <h1>{{albumDetails.title}}</h1>
+                    <h3 (click)="goToArtist(albumDetails.creatorId)">{{albumDetails.creatorName}}</h3>
+                    <h5>{{albumDetails.year}}</h5>
+
+                    <h5>
+                        Genres:
+                        <span *ngFor="let genre of albumDetails.genres; let i = index; let first = first; let last = last;">
+                            {{genre}}<span *ngIf="!last">,</span>
+                        </span>
+                    </h5>
+                </div>
+            </div>
+        </div>
+        <div class="song-container">
+            <div class="song-header">
+                <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-play-fill" viewBox="0 0 16 16">
+                        <path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
+                    </svg>
+                </span>
+                <h5 *ngIf="isOwner" (click)="editAlbum()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                        <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+                    </svg>
+                </h5>
+                <h5 *ngIf="isOwner" (click)="deleteAlbum()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                        <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+                    </svg>
+                </h5>
+            </div>
+            <app-song-list 
+            [allowDrag]="false"
+            [songs]="songList" 
+            [columns]="columns"
+            [currentSong]="currentSong"
+            (pageNumber)="loadSongsOnScroll($event)"
+            (sort)="sort($event)"
+            (contextMenuData)="openMenu($event)"
+            (songToPlay)="playSong($event)"
+            ></app-song-list>
+            <app-song-add *ngIf="isOwner" [albumId]="albumDetails.id" [songLenght]="songList.items.length"></app-song-add>
+        </div>
+    </div>
+</div>
+
+<div style="visibility: hidden; position: fixed;" 
+[style.left]="menuPosition.x" 
+[style.top]="menuPosition.y" 
+[matMenuTriggerFor]="rightMenu">
+</div>
+<mat-menu #rightMenu="matMenu"> 
+    <ng-template matMenuContent let-playlists="playlists" let-song="song"> 
+        <button mat-menu-item *ngIf="!song.isArchived" [matMenuTriggerFor]="playlistMenu">
+            Add to playlist
+        </button>
+        <mat-menu #playlistMenu="matMenu">
+            <button mat-menu-item (click)="addToPlaylist(song, playlist.id)" *ngFor="let playlist of playlists">
+                {{playlist.title}}
+            </button>
+        </mat-menu>
+        <button *ngIf="isOwner" mat-menu-item (click)="editSong(song)">Edit</button>
+        <button *ngIf="isOwner" mat-menu-item (click)="deleteSong(song)">Delete</button>
+        <button mat-menu-item (click)="closeMenu()">Close</button> 
+    </ng-template> 
+</mat-menu>

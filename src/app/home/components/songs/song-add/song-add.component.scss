@@ -1,0 +1,57 @@
+form{
+    padding: 15px 25px;
+}
+.song-list-row{
+    transition: .2s ease-in-out;
+    display: flex;
+    justify-content: space-between;
+    padding-right: 30px;
+    width: 100%;
+    color: #fff;
+
+    div{
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 16px;
+        font-weight: bold;
+        width: 220px;
+
+        button{
+            background-color: rgb(6, 151, 6);
+            color: #fff;
+        }
+
+        input{
+            margin-left: 15px;
+            background: transparent;
+            color: #fff;
+            outline: none;
+            border:  none;
+            border-bottom: 2px solid #fff;
+        }
+    }
+
+    div:first-child{
+        width: 40px;
+        margin-right: 20px;
+    }
+
+    div:last-child{
+        width: 135px;
+    }
+
+    div:nth-child(2){
+        flex-grow: 2;
+    }
+
+    div:nth-child(3){
+        flex-grow: 1;
+    }
+}
+
+.artists {
+    margin-bottom: 20px;
+}
+
+mat-select{
+    width: 200px;
+}

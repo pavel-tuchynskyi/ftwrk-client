@@ -1,0 +1,31 @@
+.item-group{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+
+    div{
+        margin-right: 20px;
+        margin-bottom: 20px;
+        background-color: rgb(46, 45, 45, .6);
+        padding: 15px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: .2s ease-in-out;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+        img{
+            border-radius: 10px;
+            margin-bottom: 10px;
+            height: 200px;
+            width: 200px;
+        }
+
+        h4{
+            margin-bottom: 5px;
+        }
+    }
+
+    div:hover{
+        background-color: rgb(46, 45, 45, .9);
+    }
+}

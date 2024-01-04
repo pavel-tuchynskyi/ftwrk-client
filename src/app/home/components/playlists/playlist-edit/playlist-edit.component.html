@@ -1,0 +1,30 @@
+<div class="edit-form-wrapper">
+    <div class="edit-form-container">
+        <div class="edit-header">
+            <h1>Edit Playlist</h1>
+            <svg (click)="close()" xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+            </svg>
+        </div>
+        <form [formGroup]="editForm" class="edit-form" (ngSubmit)="submit()">
+            <div class="edit-playlist">
+                <div class="edit-poster">
+                    <img [src]="localUrl? localUrl : poster">
+                    <input type="file" #file (change)="uploadImage($event)" style="display:none;">
+                    <button type="button" class="btn edit-profile-btn" (click)="file.click()">Upload File</button>
+                </div>
+                <div class="edit-item-list">
+                    <div class="edit-item">
+                        <label for="title">Title:</label>
+                        <input type="text" class="form-control" id="title" formControlName="title">
+                    </div>
+                    <div class="edit-item">
+                        <label for="description">Description:</label>
+                        <textarea id="description" class="form-control" formControlName="description" rows="5"></textarea>
+                    </div>
+                </div>
+            </div>
+            <button class="submit-btn" [disabled]="!editForm.valid" type="submit">Save</button>
+        </form>
+    </div>
+</div>

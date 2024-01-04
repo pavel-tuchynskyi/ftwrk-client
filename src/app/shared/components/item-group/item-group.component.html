@@ -1,0 +1,9 @@
+<div class="item-group" infinite-scroll
+[infiniteScrollDistance]="2"
+[infiniteScrollThrottle]="1000"
+(scrolled)="onScroll()">
+    <div *ngFor="let item of items" (click)="clicked(item)">
+        <img [src]="item.poster">
+        <h5>{{item.title}}</h5>
+    </div>
+</div>

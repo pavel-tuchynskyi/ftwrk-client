@@ -1,0 +1,9 @@
+<div class="profile-overview-wrapper">
+    <div class="profile-overview-container">
+        <img [src]="picture ?? 'assets/img/profile-picture-default.jpg'" class="profile-pic">
+        <ul class="list-group">
+            <li class="list-item"><div [routerLink]="['/profile-overview']">Profile Overview</div></li>
+            <li class="list-item"><div [routerLink]="['/edit-profile']">Edit Profile</div></li>
+        </ul>
+    </div>
+</div>

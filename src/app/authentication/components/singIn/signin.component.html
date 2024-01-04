@@ -1,0 +1,18 @@
+<div class="signin-wrapper">
+    <div class="signin-container">
+        <h1 class="h1">{{'Sign in' | uppercase}}</h1>
+        <form [formGroup]="signInForm" (ngSubmit)="signIn()">
+            <div>
+                <input class="form-control" type="email" formControlName="email" placeholder="Email" autofocus>
+                <input class="form-control" type="password" formControlName="password" placeholder="Password">
+                <div class="forgot-password">
+                    <p>Forgot password? <a [routerLink]="['/forgot-password']">Reset password</a></p>
+                </div>
+                <button class="btn login" type="submit" [disabled]="signInForm.invalid">Log In</button>
+            </div>
+        </form>
+        <h4>{{'Or' | uppercase}}</h4>
+        <app-external></app-external>
+        <h4 class="sign-up">{{"Don't have an account?" | uppercase}} <a class="sign-up-link" [routerLink]="['/registration']">SIGN UP</a></h4>
+    </div>
+</div>
